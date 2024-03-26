@@ -1,0 +1,4 @@
+data/fr.titouanfuchs.SoundMaster.desktop.in
+data/fr.titouanfuchs.SoundMaster.metainfo.xml.in
+data/fr.titouanfuchs.SoundMaster.gschema.xml
+src/window.ui

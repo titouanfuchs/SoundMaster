@@ -19,7 +19,7 @@
  */
 
 use gtk::prelude::*;
-use gtk::subclass::prelude::*;
+use adw::subclass::prelude::*;
 use gtk::{gio, glib};
 
 mod imp {
@@ -30,7 +30,7 @@ mod imp {
     pub struct SoundmasterWindow {
         // Template widgets
         #[template_child]
-        pub header_bar: TemplateChild<gtk::HeaderBar>,
+        pub header_bar: TemplateChild<adw::HeaderBar>,
         #[template_child]
         pub label: TemplateChild<gtk::Label>,
     }
@@ -39,7 +39,7 @@ mod imp {
     impl ObjectSubclass for SoundmasterWindow {
         const NAME: &'static str = "SoundmasterWindow";
         type Type = super::SoundmasterWindow;
-        type ParentType = gtk::ApplicationWindow;
+        type ParentType = adw::ApplicationWindow;
 
         fn class_init(klass: &mut Self::Class) {
             klass.bind_template();
@@ -54,11 +54,12 @@ mod imp {
     impl WidgetImpl for SoundmasterWindow {}
     impl WindowImpl for SoundmasterWindow {}
     impl ApplicationWindowImpl for SoundmasterWindow {}
+    impl AdwApplicationWindowImpl for SoundmasterWindow {}
 }
 
 glib::wrapper! {
     pub struct SoundmasterWindow(ObjectSubclass<imp::SoundmasterWindow>)
-        @extends gtk::Widget, gtk::Window, gtk::ApplicationWindow,        @implements gio::ActionGroup, gio::ActionMap;
+        @extends gtk::Widget, gtk::Window, gtk::ApplicationWindow, adw::ApplicationWindow,        @implements gio::ActionGroup, gio::ActionMap;
 }
 
 impl SoundmasterWindow {

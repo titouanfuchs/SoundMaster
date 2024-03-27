@@ -19,7 +19,7 @@
  */
 
 use gtk::prelude::*;
-use gtk::subclass::prelude::*;
+use adw::subclass::prelude::*;
 use gtk::{gio, glib};
 
 use crate::config::VERSION;
@@ -35,7 +35,7 @@ mod imp {
     impl ObjectSubclass for SoundmasterApplication {
         const NAME: &'static str = "SoundmasterApplication";
         type Type = super::SoundmasterApplication;
-        type ParentType = gtk::Application;
+        type ParentType = adw::Application;
     }
 
     impl ObjectImpl for SoundmasterApplication {
@@ -68,11 +68,12 @@ mod imp {
     }
 
     impl GtkApplicationImpl for SoundmasterApplication {}
-    }
+    impl AdwApplicationImpl for SoundmasterApplication {}
+}
 
 glib::wrapper! {
     pub struct SoundmasterApplication(ObjectSubclass<imp::SoundmasterApplication>)
-        @extends gio::Application, gtk::Application, 
+        @extends gio::Application, gtk::Application, adw::Application,
         @implements gio::ActionGroup, gio::ActionMap;
 }
 
@@ -96,13 +97,13 @@ impl SoundmasterApplication {
 
     fn show_about(&self) {
         let window = self.active_window().unwrap();
-        let about = gtk::AboutDialog::builder()
+        let about = adw::AboutWindow::builder()
             .transient_for(&window)
-            .modal(true)
-            .program_name("soundmaster")
-            .logo_icon_name("fr.titouanfuchs.SoundMaster")
+            .application_name("soundmaster")
+            .application_icon("fr.titouanfuchs.SoundMaster")
+            .developer_name("Unknown")
             .version(VERSION)
-            .authors(vec!["Unknown"])
+            .developers(vec!["Unknown"])
             .copyright("© 2024 Unknown")
             .build();
 
